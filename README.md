@@ -1,15 +1,15 @@
 # Official docs for the GiftCarder CA software
 
-What is GiftCarder?
+
+**What is GiftCarder?**
 ___________________
 
 GiftCarder.CA is a fully modular GiftCard checking tool. 
 
 This software let's you generate and check the validity and balance of many different giftcards and this insanely fast. You can also make and download third-party configs for any other Giftcard merchant.
 
-=================================================================================
+
 **The default set of features included in the software are, but not limited to:**
-=================================================================================
 
     - Fast asynchronous tasks (up 10000+ CPM)
     - Different checking modes such as Random generated cards (based on patterns), Card Range checking and Combolists
@@ -32,12 +32,12 @@ This software let's you generate and check the validity and balance of many diff
 *(GiftCarder CA is a tool by Bot Beater, and is in no way related to GiftCarder by xPolish/NextGenz, GiftCarder by Polar, FireCards or any other giftcard bruteforcing tool that was not released by Bot Beater)*
 
 
-Contributing
+**Contributing**
 ____________
 
 Contributions are very welcome :)
 
-About
+**About**
 _____
 
 GiftCarder.CA was created by Bot Beater. 
