@@ -6,12 +6,10 @@ _________
 
 .. toctree::
    :maxdepth: 2
+   how-to-use
+   with-generator
+   without-generator
 
-   getting-started
-   import-area
-   setup-area
-   generating-area
-   setting-area
 
 
 What is GiftCarder?
@@ -29,10 +27,11 @@ This software let's you generate and check the validity and balance of many diff
     - Different checking modes such as Random generated cards (based on patterns), Card Range checking and Combolists
     - Alphanumerical cards support
     - Pin support
-    - Captcha support with 2captcha, Anticaptcha, Capmonster and XEvil
+    - Captcha support with 2captcha, Anticaptcha, Solve-captcha, Capmonster and XEvil
     - Token, Cookie and Session support
     - Proxy support
     - Module support
+	- Automated Module-Maker
     - Module making documentation
     - Custom number of workers
     - Pre-installed patterns and valids
@@ -55,6 +54,8 @@ About
 _____
 
 GiftCarder.CA was created by Bot Beater. 
+
+module list can be found here: https://giftcarder.ca/modules
 
 To get in contact feel free to DM me on Discord if you can find me, or if you're unsure send me an email at giftcarder@pm.me
 
