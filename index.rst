@@ -6,10 +6,10 @@ _________
 
 .. toctree::
    :maxdepth: 2
+   
    how-to-use
    with-generator
    without-generator
-
 
 
 What is GiftCarder?
@@ -31,8 +31,8 @@ This software let's you generate and check the validity and balance of many diff
     - Token, Cookie and Session support
     - Proxy support
     - Module support
-	- Automated Module-Maker
     - Module making documentation
+	- Automated Module Maker
     - Custom number of workers
     - Pre-installed patterns and valids
     - Auto-save

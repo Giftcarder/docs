@@ -1,19 +1,23 @@
 Understanding the module system (advanced)
 ==========================================
+
 In some cases, the module maker included with giftcarder may not be enough, that may be the case if you're trying to parse json data for example.
 
 So in addition to learning how to use the module maker, you can get a short crash-course on the python programming language as well as on the inner
 workings of the GiftCarder CA module system.
 
+
+
 Getting Started
 ---------------
 
 A "little" example
-__________________
+~~~~~~~~~~~~~~~~~~
 
 **To get us started with module making, let's use a simple example.**
 
-Now we'll use the website Abuelos, who has a balance checker at the url http://abuelos.alohaenterprise.com:8080/abuelos/abuelos_card_balance_get.jsp
+Now we'll use the website Abuelos, Abuelos has a balance checker at the url: http://abuelos.alohaenterprise.com:8080/abuelos/abuelos_card_balance.jsp
+And requests are sent as POST to the url http://abuelos.alohaenterprise.com:8080/abuelos/abuelos_card_balance_get.jsp
 
 Now this website is let's say very primitive, and does not require a pin, captcha, cookie or token
 
@@ -88,8 +92,10 @@ Here's a commented sample module::
 
 Now you might be a bit confused at all of this, and that's totally fine, but don't worry by following the examples and guides for each area, you'll be up and making modules in no time! ;)
 
+
+
 Import Area
-===========
+-----------
 
 
 What is it?
@@ -100,6 +106,7 @@ In the programming language Python, you can "import" bundled code to make your t
 These bundles of code come in what's called a library, using the import statement, you can easily load the library's code without having to rewrite it yourself.
 
 Some libraries can be native to Python such as the "random" library, but some others can be made by third-parties.
+
 
 How do I use it?
 ~~~~~~~~~~~~~~~~
@@ -124,6 +131,7 @@ You may also import multiple functions from a same library::
 
         from example import do_stuff, do_things, do_something
 
+
 What libraries can I import?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -144,8 +152,9 @@ These modules are essentially for the scrapping of tokens and value:
 Since GiftCarder CA's module processor is based on Python, any other third party python library you'd like to use can be included by sending me a request on Discord/Telegram/Email
 
 
+
 Setup Area
-==========
+----------
 
 Introduction
 ~~~~~~~~~~~~
@@ -160,7 +169,7 @@ Name
 
 The first section is the name. This is the name that will be displayed when loading the module:
 
-.. image:: https://b.catgirlsare.sexy/AmiC.png
+.. thumbnail:: https://b.catgirlsare.sexy/AmiC.png
     :align: center
     :alt: Displayed name
 
@@ -172,12 +181,12 @@ Make sure the name is between apostrophes like such ``"Name"`` or ``'Name'``
 
 Maker sure the name isn't over 78 characters or it will be automatically shrunk down.
 
-Mehtod
+
+Method
 ~~~~~~
 
-================================
-**How to know which one I want**
-================================
+How to know which one I want
+____________________________
 
 If you are not familiar with HTTP methods and Networking, when you send a request to a server, it will be setup in a certain way, usually either GET or POST, for more info on methods: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 
@@ -185,13 +194,13 @@ Now to find out what method the website is using when checking for balance, you 
 
 This should open up a tool like this (Firefox):
 
-.. image:: https://b.catgirlsare.sexy/S_AM.png
+.. thumbnail:: https://b.catgirlsare.sexy/S_AM.png
     :align: center
     :alt: Network tool (Firefox)
 
 Now simply try and check your card balance (usually by clicking a button after inputting a card number), and you should see some requests are being made to the website as such:
 
-.. image:: https://b.catgirlsare.sexy/-8Ja.png
+.. thumbnail:: https://b.catgirlsare.sexy/-8Ja.png
     :align: center
     :alt: Network tool (Firefox)
 
@@ -199,15 +208,20 @@ Here we can see that the browser is sending a **POST** request to the url https:
 
 If you are unsure which request is the one that checks the card balance, simply head over to the "Params" tab and check if the card number you put is there or not:
 
-.. image:: https://b.catgirlsare.sexy/wnZM.png
+.. thumbnail:: https://b.catgirlsare.sexy/wnZM.png
     :align: center
     :alt: Params tab
 
-****
+**JSON's case**
 
-===============================
-**How to set it in the module**
-===============================
+Now in the case of sending JSON data, it'll actually usually be displayed as a POST request in the Network tool. However you can find out if you're sending JSON data by heading over to the "Params" tab and looking at the type of data that is sent. If it displays the data as ``Form Data`` that means it's a regular POST request, however if it displays ``JSON`` that means it's sending JSON data, example:
+
+.. thumbnail:: http://japan.u.catgirlsare.sexy/N4_m.png
+    :align: center
+    :alt: JSON data in a POST request example
+
+How to set it in the module
+___________________________
 
 The method must be written as such::
 
@@ -246,6 +260,7 @@ When making modules, you have the option to let the user provide his own valid g
 
 This will request the user to input his own valid giftcard upon loading your module.
 
+
 Pin
 ~~~
 
@@ -263,6 +278,7 @@ You must set the pin argument to either ``True`` or ``False`` (**WITHOUT** apost
 
     pin = False
 
+
 Cookie
 ~~~~~~
 
@@ -272,6 +288,7 @@ While most websites don't usually require you to set up cookies in your requests
 You must set the cookie argument to either ``True`` or ``False`` (**WITHOUT** apostrophes) as such::
 
     cookie = False
+
 
 Token
 ~~~~~
@@ -286,12 +303,13 @@ You must set the token argument to either ``True`` or ``False`` (**WITHOUT** apo
 
     token = False
 
+
 Captcha
 ~~~~~~~
 
 Captchas are those annoying "I'm not a robot" boxes that will ask you to solve some shitty puzzle or click on some pictures to access whatever you want to access.
 
-.. image:: https://b.catgirlsare.sexy/pqER.png
+.. thumbnail:: https://b.catgirlsare.sexy/pqER.png
     :align: center
     :alt: Example of a captcha
 
@@ -303,20 +321,20 @@ You must set the captcha argument to either ``True`` or ``False`` (**WITHOUT** a
 
     captcha = False
 
+
 Site key
 ~~~~~~~~
 
 Site keys are what your captcha solving service will use to identify which captcha to solve. They are usually different for each merchant.
 
-============================
-**How to find the site key**
-============================
+How to find the site key
+________________________
 
 To find the websites site key, the easiest way to do so is to open the Network console (cf the Method section for instructions) and solve the captcha manually.
 
 You should see a bunch of requests like such:
 
-.. image:: https://b.catgirlsare.sexy/cpxD.png
+.. thumbnail:: https://b.catgirlsare.sexy/cpxD.png
     :align: center
     :alt: Example of a captcha request
 
@@ -326,17 +344,15 @@ Now what interestes you here are the **POST** requests to google.com, simply cli
 
 Here the site key is whatever comes after the "?k=" parts. In this case our site key would be ``6LdndBYUAAAAAIE_sQA2y29GSRaKJHKx2DodPT6m``
 
-===============================
-**How to set it in the module**
-===============================
+How to set it in the module
+___________________________
 
 Once the site key has been found, you must declare it as such::
 
     site_key = "6LdndBYUAAAAAIE_sQA2y29GSRaKJHKx2DodPT6m" #MUST BE BETWEEN APOSTROPHES
 
-================================
-**What if I don't use Captcha?**
-================================
+What if I don't use Captcha?
+____________________________
 
 If you set captcha to False, then you must **NOT** remove the site_key argument. You must simply remove whatever is between apostrophes as such::
 
@@ -348,7 +364,7 @@ Error
 
 GiftCarder CA has an easy and automatic way of handling invalid giftcards, to do so you must simply declare whatever error message the websites returns when a card is invalid
 
-.. image:: https://b.catgirlsare.sexy/vo6C.png
+.. thumbnail:: https://b.catgirlsare.sexy/vo6C.png
     :align: center
     :alt: Example of an invalid card number
 
@@ -364,6 +380,7 @@ The errors are declared as Python lists, and must be put in between [square brac
 
 **Note: If the website has capctha, it is HIGHLY recommended to set the error for an invalid captcha with the others errors, captcha solving technology is not perfect and timeouts + Invalid solving could lead to false positives** 
 
+
 Retries
 ~~~~~~~
 
@@ -375,6 +392,7 @@ Here you can set the maximum amount of retries (I usually set it to 0)::
 
     retries = 0 #Max retries limit (Must NOT be in between apostrophes)
 
+
 Timeout
 ~~~~~~~
 
@@ -385,6 +403,7 @@ You can set the maximum timeout limit in seconds as such::
     timeout = 8 #Max timeout limit in seconds (Must NOT be in between apostrophes)
 
 It is recommended to not put the limit to low either as this may lead to errors and false negatives with slower internet connections
+
 
 Headers
 ~~~~~~~
@@ -398,10 +417,8 @@ While GiftCarder CA does automatically take care of headers, some websites requi
 
    headers = None #Custom headers, None will use default
 
-
-==============================
-**Example of a custom header**
-==============================
+Example of a custom header
+__________________________
 
 In the case where you need to set up a special User-Agent or a specific proprietary header (the X-Something headers)::
 
@@ -409,8 +426,10 @@ In the case where you need to set up a special User-Agent or a specific propriet
 
 These headers will be added to the already existing default headers, unless they replace one of the default values. (If you set up a custom User-Agent, it'll replace the default User-Agent value)
 
+
+
 Generating Area
-===============
+---------------
 
 Introduction
 ~~~~~~~~~~~~
@@ -418,9 +437,9 @@ Introduction
 Since modules are written in Python, they use Functions which are called "Definitions", these "defs" are functions that the software will run. 
 More info here: https://www.tutorialspoint.com/python/python_functions
 
-=============
-**Example**
-=============
+Code Example
+____________
+
 little example code::
 
         #====================== DEFINITON AREA =====================
@@ -445,9 +464,9 @@ little example code::
                     pincode += str(randint(0,9)) #here pin is numerical
                 return pincode
 
-======
-Basics
-======
+
+The Basics
+__________
 
 Each module has 2 "basic" defs that you must use:
 
@@ -464,9 +483,8 @@ async def cardcode
 
 This is the main "cardcode generating algorithm", this is the function that will generate the main card.
 
-==============
-**The basics**
-==============
+The Basics
+__________
 
 The def must start with ``async def cardcode(cardcode, n):`` and end with ``return cardcode``
 
@@ -475,14 +493,13 @@ Like so::
     async def cardcode(cardcode, n):
         return cardcode #Be sure to respect the Python indentation
 
-==================
-**The generating**
-==================
+The Generating
+______________
 
 To start off with, the ``async def cardcode`` automatically sets a variable called ``cardcode`` which just happens to be the pattern. If you set a valid in the SETUP AREA then carcode will be equal to whatever pattern you put. However if you put valid to ``None`` in the SETUP AREA, then GiftCarder will automatically generate a pattern by taking the valid giftcard provided by the user.
 
 **Example**
------------
+
 
 Here in this example let's say you set pattern to None or that you want to generate a digital base10 code, you would use the **random** python library to generate code (cf: the Import Area) (don't forget to import it like such ``from random import randint`` and check the docs https://docs.python.org/3/library/random.html)::
 
@@ -506,14 +523,15 @@ means it'll take the valid giftcard code, remove ``n`` digits and then add ``n``
 
 You can then combine this with the "string" library for alphanumerical cardcodes.
 
+.. _pincode-reference-label:
+
 async def pincode
 ~~~~~~~~~~~~~~~~~
 
 This is the exactly the same thing as ``async def cardcode`` but for pincodes.
 
-===============
-**The basics**
-===============
+The Basics
+__________
 
 The def must start with ``async def pincode(pincode = ""):`` and end with ``return pincode``
 
@@ -522,10 +540,8 @@ Like so::
     async def pincode(pincode = ""):
         return pincode #Be sure to respect the Python indentation
 
-
-==================
-**The generating**
-==================
+The generating
+______________
 
 To start off with, the ``async def pincode`` automatically sets a variable called ``pincode``, usually pincodes don't have any patterns and thus we set ``pincode = ""`` in the function. 
 
@@ -533,9 +549,11 @@ If it would happen however the pincode did have a pattern, you could simple set 
 
     async def pincode(pincode = "pattern here"):
         return pincode #Be sure to respect the Python indentation
-		
+
+
+
 Setting Area
-=============
+------------
 
 Introduction
 ~~~~~~~~~~~~
@@ -543,9 +561,9 @@ Introduction
 Since modules are written in Python, they use Functions which are called "Definitions", these "defs" are functions that the software will run.
 More info here: https://www.tutorialspoint.com/python/python_functions
 
-===========
-**Example**
-===========
+An Example
+__________
+
 simple example::
 
 
@@ -576,17 +594,16 @@ These must always be present and must not be remove.
 
 However 5 more "optional" defs exist in case you need to use tokens or cookies
 
-==============
-**For tokens**
-==============
+For tokens
+__________
 
 - def token_request():
 
 - async def token_scrapper(response):
 
-===============
-**For cookies**
-===============
+For cookies
+___________
+
 - def cookie_request():
 
 - async def cookie_scrapper(response):
@@ -601,31 +618,32 @@ def request()
 
 This is will return the url to send the request to.
 
-===================
-**Finding the url**
-===================
+Finding the url
+_______________
+
+
 The url the request is sent to might not always be the same than the url of the webpage the balance checker is on.
 
 To find what url the request is sent to, you need to open the Network console (cf: the Method section of Setup Area)
 
 Here we can see the Request URL
 
-.. image:: https://b.catgirlsare.sexy/Q5r4.png
+.. thumbnail:: https://b.catgirlsare.sexy/Q5r4.png
     :align: center
     :alt: Request Url
 	
-=====================
-**Declaring the url**
-=====================
+Declaring the url
+_________________
+
 Setting up the url is quite straighforward, you just set a variable to the url and return that variable like such::
 
         def request(): #URL to send the requests to
             url = "http://example.com/balance" #url must be in BETWEEN APOSTROPHES!
             return url #You must not forget to return the url! (and make sure indentation is correct)
 
-==================
-**Special cases**
-==================
+Special cases
+_____________
+
 To send queries or data through a request, you must declare them in the settings() function, however if it so happens that the request's is **POST while Also** requiring queries, you must set them up directly in the url like such::
 
         def request(): #URL to send the requests to
@@ -640,20 +658,19 @@ The scrapper is a very important function of the module, as it is the one that's
 
 You can fetch the balance of a card by analysing the text response a webpage returns when a card is valid and finding where in the source code the value of a card is declared. This can be accomplished in many different ways in Python.
 
-==============
-**The basics**
-==============
+The basics
+__________
+
 
 ``async def scrapper(response):`` In here the response object corresponds to the text source code of the response webpage
 
 You can use Python's tools to cut/slice/scrap code and find the cards value, you can also use third party libraries such as BeautifulSoup4 or lxml with XPath and such.
 
-===========
-**Example**
-===========
+Some Examples
+_____________
 
-Normal HTTP/XML response
-------------------------
+
+**Normal HTTP/XML response**
 
 Let's take a simple webpage where a valid giftcard would return this reponse:
 
@@ -664,7 +681,7 @@ Let's take a simple webpage where a valid giftcard would return this reponse:
 
 Now we must look through the network tool in the response area (cf: Setup Area) and we'll find this:
 
-.. image:: https://b.catgirlsare.sexy/cDDd.png
+.. thumbnail:: https://b.catgirlsare.sexy/cDDd.png
     :align: center
     :alt: Example of valid response
 
@@ -677,18 +694,17 @@ So now to properly scrap this we can use the lxml library (https://lxml.de/index
 		
 Here we are using Xpath to fetch the ``Your balance: $231.08`` code and then by using ``.replace('Your balance ','')`` we're directly setting the value to be returned to be ``$231.08`` without all of that "Your balance" shit.
 
-JSON response
--------------
+**JSON response**
 
 Let's take a simple webpage where a valid giftcard would return this response:
 
-.. image:: https://b.catgirlsare.sexy/xRvm.png
+.. thumbnail:: https://b.catgirlsare.sexy/xRvm.png
     :align: center
     :alt: Example of valid response
 
 Now we must look through the network tool (cf: Setup Area) and we'll find this:
 
-.. image:: https://b.catgirlsare.sexy/Knem.png
+.. thumbnail:: https://b.catgirlsare.sexy/Knem.png
     :align: center
     :alt: Example of valid response
 
@@ -701,9 +717,7 @@ Now using ujson we can easily parse this response as so::
 
 This will return $0.38
 
-=============================
 **Using XPath, lxml and bs4**
-=============================
 
 As we saw above with the Html case, we can use the lxml library to easily scrap data with XPath.
 
@@ -713,14 +727,15 @@ If you'd like to have more documentation on XPath, lxml or bs4 you can find some
 - https://www.crummy.com/software/BeautifulSoup/bs4/doc/
 - https://www.w3schools.com/xml/xml_xpath.asp
 
+
 def settings
 ~~~~~~~~~~~~
 
 The settings function returns what you want to send as a query / data / json in your request
 
-===========
-**Basics**
-===========
+The Basics
+__________
+
 
 There is 4 arguments that are passed with the settings section:
 
@@ -737,13 +752,12 @@ it is syntaxed as such::
 
 As you can see that data must be formatted with brackets as such: ``{'argument':'value', 'argument2':'value'}``
 
-===============================
-**How to find the data/params**
-===============================
+How to find the data/params
+___________________________
 
 Finding what data is supposed to be sent is easy, to do so simply use the network console (cf: the Method section in Setup Area) and click the Params tab
 
-.. image:: https://b.catgirlsare.sexy/wnZM.png
+.. thumbnail:: https://b.catgirlsare.sexy/wnZM.png
     :align: center
     :alt: Params tab
 
@@ -753,19 +767,18 @@ Here this data would give use this::
         data = {'campanyId':'bbp01', 'pageMode':'0', 'loginAttempts':'0', 'enteredCardNumber':'0000000000'} #data to send
         return (data)
 
-=================
-**Special cases**
-=================
+Special cases
+_____________
 
-Tokens
--------
+**When using Tokens**
+
 See the Tokens section
 
-The empty data
---------------
+**The empty data case**
+
 When you have an empty like such:
 
-.. image:: https://b.catgirlsare.sexy/p3yv.png
+.. thumbnail:: https://b.catgirlsare.sexy/p3yv.png
     :align: center
     :alt: Empty arg
 
@@ -787,9 +800,8 @@ Then you must add these 2 Functions:
 
 - async def token_scrapper(response):
 
-=================
 def token_request
-=================
+_________________
 
 This works exactly like ``def request():`` does. Tokens aren't always hidden in the same webpage of the request.
 
@@ -799,9 +811,8 @@ A such you must declare what url the bot will fetch the source code from::
         url = 'https://example.com/page'
         return url
 
-==================================
 async def token_scrapper(response)
-==================================
+__________________________________
 
 Now this is the same thing as the ``async def scrapper(response)`` function. Except that instead of scrapping a card's value, we're scrapping a (or multiple) token's value.
 
@@ -812,9 +823,8 @@ This function works the same as the scrapper one like this::
         token = tree.xpath('//*[@name="OWASP_CSRFTOKEN"]/@value')[0] #little example using the lxml library and XPath
         return token
 
-====================
 Multiple tokens case
-====================
+____________________
 
 In the case the website you're making a module for requires more than one token hidden in the source code, you must bundle your tokens together in square brackets to make a python list
 
@@ -826,9 +836,8 @@ Like this::
         token_two = tree.xpath('//*[@name="XKCD_CSRFTOKEN"]/@value')[0]
         return [token_one, token_two] #this will return both tokens as a list
 
-===================================
 Using them in the settings function
-===================================
+___________________________________
 
 Now once you've specified the url to fetch the tokens, and scrapped them, it is now time to use them in your request. 
 
@@ -873,9 +882,8 @@ Then you must add these 3 Functions:
 
 - def cookie_settings():
 
-==================
 def cookie_request
-==================
+__________________
 
 This works exactly like ``def request():`` and ``def token_request()``.
 
@@ -885,9 +893,8 @@ A such you must declare what url the bot will fetch the cookies from::
         url = 'https://example.com/page'
         return url
 
-===================================
 async def cookie_scrapper(response)
-===================================
+___________________________________
 
 This function will work a little differently than the normal scrapper function or the token scrapper.
 
@@ -928,9 +935,8 @@ From there we can scrap the cookie values by name like so::
 				
 		return [nid_cookie, jar_cookie]
 
-============================
 def cookie_settings(cookies)
-============================
+____________________________
 
 This is where we'll declare the cookies to be passed during the request, like so::
 
